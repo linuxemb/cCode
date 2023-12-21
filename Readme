@@ -12,3 +12,41 @@ Transaction ID: T000000003
 Customer ID: C0000002
 Amount: 3333.33:
 
+===============
+https://github.com/tekinozbek/ods/tree/master/c
+
+ Data Structures in C
+This is an implementation of Open Data Structures in C. It is written in ANSI C (C89) to maximize compatibility with other compilers.
+
+Implemented data structures
+More information on the data structures (implementation details, running times, etc.) can be found in the book.
+
+ArrayStack (equivalent to FastArrayStack in the book)
+ArrayQueue
+ArrayDeque
+DualArrayDeque
+RootishArrayStack
+SLList
+DLList
+SEList
+SkiplistSSet
+SkiplistList
+ChainedHashTable
+BinarySearchTree
+How to use the library
+
+=======  arrayqueue --resize() leak
+=51386== 80 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==51386==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==51386==    by 0x486D78E: resize (arrayqueue.c:68)
+==51386==    by 0x486DB61: arrayqueue_enqueue (arrayqueue.c:135)
+==51386==    by 0x1095D2: main (main.c:90)
+==51386== 
+==51386== LEAK SUMMARY:
+==51386==    definitely lost: 80 bytes in 1 blocks
+
+
+====================
+next(iterator_t *): Advances to the next element and returns 1, if available. Otherwise, returns 0. If iterating in reverse, this will advance to the previous element (not all data structures can be iterated in reverse order, check the documentation for _iterator()).
+elem(iterator_t *): Returns a pointer to the element in the data structure (i.e. not a copy). Be careful not to exceed the bounds of this pointer (which is elem_size bytes).
+dispose(iterator_t *): Releases allocated memory.
