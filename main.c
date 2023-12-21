@@ -89,8 +89,9 @@ printf("%d \n", *(int *)(q.array)) ;
  int *elemp = (int*)malloc(sizeof(int));
 
 printq_peek(&q, elemp);
-printf("====capacity %d", capacity);
+printf("====capacity--reversing %d", capacity);
  // dequeie
+
 
 arrayqueue_dequeue (&q, elemp);
 arrayqueue_dequeue (&q, elemp);

@@ -77,11 +77,11 @@ static void resize(arrayqueue_t* q) {
 
     memcpy(new,
            (char *)q->array + (q->pos * q->elem_size),
-           q->elem_size * z);
+           q->elem_size * z);    // z len
 
     memcpy((char *)new + (z * q->elem_size),
            (char *)q->array,
-           q->elem_size * (q->length - z));
+           q->elem_size * (q->length - z));   // len -z
 
     free(q->array);
 
@@ -166,8 +166,6 @@ void arrayqueue_init(arrayqueue_t* q, size_t elem_size, size_t initial_capacity)
 
     q->alloc_length = initial_capacity;
     q->length = 0;
-   // q->length = initial_capacity;
-    
     q->pos = 0;
     q->elem_size = elem_size;
 }
