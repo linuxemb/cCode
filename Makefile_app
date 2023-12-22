@@ -1,0 +1,26 @@
+CC = gcc
+CFLAGS = -Wall -g -I./include
+LIBS = -lodsc 
+BUILD_DIR := build
+
+SRC = main_dual.c
+OBJ = $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC))
+EXEC = main
+
+all: $(EXEC)
+
+# $(BUILD_DIR)/$(EXEC): $(OBJ)
+# 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+
+$(EXEC): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+.PHONY: clean
+clean:
+	rm -fr $(BUILD_DIR) $(EXEC)

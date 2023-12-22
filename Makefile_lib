@@ -68,4 +68,4 @@ install: lib
 	mv $(LIB).so $(INSDIR)/$(LIB).so && rm -f *.os
 clean:
 	# rm -fr $(BUILD_DIR) *.o *.so *.a a.out
-	rm -fr *.o *.so *.a a.out
+	rm -fr *.o *.so *.a a.out`
