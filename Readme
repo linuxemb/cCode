@@ -1,3 +1,19 @@
+osd lib open stack data structure
+ testing
+----------------- prj/ main.c
+                     /Makefile_lib
+                    /Makefile_app
+                   /src/*.c for librarys
+------------------------------
+
+### Usage--
+from top level run 
+make -f Makefile_lib to build the library
+run 
+make -f Makefile_app to build the main
+=====================
+
+
 rr[0]: T000000001,C0000001,0000001.11
 arr[1]: T000000002,C0000002,0000200.22
 arr[2]: T000000003,C0000002,0003333.33
