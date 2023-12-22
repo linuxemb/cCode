@@ -23,17 +23,15 @@ CC = gcc
 # with ANSI C specs.
 # 
 ifeq ($(ansi),true)
-	ANSI_ARGS = -ansi -pedantic -Wall -Werror
+	ANSI_ARGS = -ansi -pedantic -Wall -Werror 
 endif
-
-SRC = $(wildcard src/*.c)
 
 #
 # Compile arguments
 #
 # Runs for each file in src/. $@ is the output (.o), $< is the input (.c)
 #
-COMPILE = $(CC) $(ANSI_ARGS) -fpic -I include/ -c -o $@ $<
+COMPILE = $(CC) $(ANSI_ARGS)  -g -fpic -I include/ -c -o $@ $<
 
 #
 # Shared library arguments
@@ -44,33 +42,36 @@ SHARED_LIB = $(CC) -shared -o $(LIB).so $^ -lm
 # Shared library install directory
 #
 INSDIR = /usr/lib
-BUILD_DIR := build
+
 # OBJ = arraystack.o arrayqueue.o arraydeque.o dualarraydeque.o \
 #       rootisharraystack.o sllist.o dllist.o selist.o skiplistsset.o skiplist.o \
 #       chainedhashtable.o binarysearchtree.o
 
+SRC= $(wildcard src/*.c) 
 OBJ = $(patsubst src/%.c, $(BUILD_DIR)/%.o, $(SRC))
 
-lib: $(OBJ)
-	echo $(SRC)
-	$(SHARED_LIB)
-	
+BUILD_DIR := build
 
-install: lib
-	mv $(LIB).so $(INSDIR)/$(LIB).so && rm -f *.o
-
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 
 $(BUILD_DIR)/%.o: src/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+
+
+
+lib: $(OBJ)
+	$(SHARED_LIB)
+
+install: lib
+	mv $(LIB).so $(INSDIR)/$(LIB).so && rm -f *.o
 
 # %.o: src/%.c
 # 	$(COMPILE)
-	
-	
 
 clean:
-	rm -f *.o *.so *.a a.out
+	# rm -f *.o *.so *.a a.out
+
+	rm -fr $(BUILD_DIR) *.o *.so *.a a.out
